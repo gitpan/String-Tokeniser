@@ -6,3 +6,4 @@ t/00_base.t
 t/pod-coverage.t
 t/pod.t
 Tokeniser.pm
+README

@@ -1,5 +1,8 @@
 Revision history for Perl extension String::Tokeniser.
 
+0.04  Thu Mar 31 15:32 2005
+	- Added README file;
+
 0.03  Fri Nov 12 22:20 2004
 	- Added pod.t and pod-coverage.t;
 	- Corrected pod;
