@@ -1,5 +1,10 @@
 Revision history for Perl extension String::Tokeniser.
 
-0.01  Mon Jul 12 22:15:07 1999
+0.02  Fri Nov 12 22:15 2004
+	- More than five years later, a new version;
+	- Corrected bugs with undefined values;
+	- Moved test for independent directory;
+
+0.01  Mon Jul 12 22:15 1999
 	- original version; created by h2xs 1.19
 

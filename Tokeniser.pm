@@ -10,10 +10,8 @@ require Exporter;
 # Items to export into callers namespace by default. Note: do not export
 # names by default without a very good reason. Use EXPORT_OK instead.
 # Do not simply export all your public functions/methods/constants.
-@EXPORT_OK = qw(
-	
-);
-$VERSION = '0.01';
+@EXPORT_OK = qw();
+$VERSION = '0.02';
 
 
 # Preloaded methods go here.
@@ -58,27 +56,27 @@ split in two, but should be treated as one.
 =cut
 
 sub new {
-	my $classname=shift;
-	my $self={};
-	bless($self, $classname);
-	my $sentence=shift;
-	carp "! Nothing to tokenise" unless defined $sentence;
-	my $style=shift;
-	my @list;
-	if ($style==-1) {
-		$style= "(?<=[^a-zA-Z0-9])|(?=[^a-zA-Z0-9])";
-	} elsif ($style) {
-	} else {
-		$style="(?<=[^a-zA-Z0-9_])|(?=[^a-zA-Z0-9_])";
-	}
-	$self->{STYLE} = $style;
-	@list = split /$style/, $sentence;
-	$self->{LIST} = \@list;
-	$self->{COUNT} = 0;
-	$self->{STACK} = [];
-	$self->_except(@_); # Exception handler. Is not fun.
-		
-	return($self);
+  my $classname = shift;
+  my $self = {};
+  bless($self, $classname);
+  my $sentence = shift;
+  carp "! Nothing to tokenise" unless defined $sentence;
+  my $style = shift || 0;
+  my @list;
+  if ($style==-1) {
+    $style= "(?<=[^a-zA-Z0-9])|(?=[^a-zA-Z0-9])";
+  } elsif ($style) {
+  } else {
+    $style="(?<=[^a-zA-Z0-9_])|(?=[^a-zA-Z0-9_])";
+  }
+  $self->{STYLE} = $style;
+  @list = split /$style/, $sentence;
+  $self->{LIST} = \@list;
+  $self->{COUNT} = 0;
+  $self->{STACK} = [];
+  $self->_except(@_); # Exception handler. Is not fun.
+
+  return($self);
 }
 
 =pod
@@ -233,7 +231,8 @@ or more tokens, although this is planned.
 
 =head1 AUTHOR
 
-Simon Cozens, simon@brecon.co.uk
+Originaly written by Simon Cozens;
+Maintained by Alberto Simões C<<ambs@cpan.org>>
 
 =head1 SEE ALSO
 
@@ -241,41 +240,37 @@ L<WEBPerl::Changetie>
 
 =cut
 
-# I have no idea how this works any more. And I've *only just* written
-# it.
+# I have no idea how this works any more. And I've *only just* written it.
 
 sub _except {
-	my $self=shift;
-	my $style=$self->{STYLE};
-	my %decide;
-	my $listref=$self->{LIST};
-	my @res;
+  my $self = shift;
+  my $style = $self->{STYLE};
+  my %decide;
+  my $listref=$self->{LIST};
+  my @res;
 
-	foreach (shift) {
-		my($left, $right) = split /$style/;
-		push @{$decide{$left}},$right;
-	}
+  while($_ = shift) {   # was foreach(shift) {
+    my($left, $right) = split /$style/;
+    push @{$decide{$left}}, $right;
+  }
 
-	@_=@$listref;
-	while (@_) {
-		my($first,$second) = (shift, shift);
-		if (grep {
-		 $first eq $_ and 
-		 scalar(grep { $second eq $_ } @{$decide{$_}})
-			 } keys %decide ) { # I think
-			push(@res, $first.$second);
-		} else {
-			push @res,$first;
-			if (grep { $second eq $_ } keys %decide) {
-				unshift(@_, $second);
-			} else {
-				push @res, $second;
-			}
-		}
-	}
-	$self->{LIST}=\@res;
-	return $self;
+  @_ = @$listref;
+  while (@_) {
+    my($first,$second) = (shift, shift || "");
+    if (grep { $first eq $_ and scalar(grep { $second eq $_ } @{$decide{$_}}) } keys %decide ) {
+      # I think
+      push(@res, $first.$second);
+    } else {
+      push @res,$first;
+      if (grep { $second eq $_ } keys %decide) {
+	unshift(@_, $second);
+      } else {
+	push @res, $second;
+      }
+    }
+  }
+  $self->{LIST}=\@res;
+  return $self;
 }
-			
-sub ishere { return 1 }			
-		
+
+sub ishere { return 1 }

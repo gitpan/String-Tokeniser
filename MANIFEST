@@ -2,4 +2,5 @@ Changes
 MANIFEST
 Makefile.PL
 Tokeniser.pm
-test.pl
+t/00_base.t
+META.yml                                 Module meta-data (added by MakeMaker)
