@@ -1,6 +1,8 @@
 Changes
-MANIFEST
 Makefile.PL
-Tokeniser.pm
+MANIFEST
+META.yml			Module meta-data (added by MakeMaker)
 t/00_base.t
-META.yml                                 Module meta-data (added by MakeMaker)
+t/pod-coverage.t
+t/pod.t
+Tokeniser.pm

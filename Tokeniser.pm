@@ -11,7 +11,7 @@ require Exporter;
 # names by default without a very good reason. Use EXPORT_OK instead.
 # Do not simply export all your public functions/methods/constants.
 @EXPORT_OK = qw();
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 
 # Preloaded methods go here.
@@ -52,6 +52,8 @@ expression which will be fed to a C<split> to determine the tokens.
 
 Then may optionally follow a list of exceptions: tokens that would be
 split in two, but should be treated as one.
+
+=back
 
 =cut
 
@@ -224,6 +226,8 @@ sub restore { my $self=shift; my $temp;
 
 =pod 
 
+=back
+
 =head1 FEATURES
 
 At present, there is no support for exceptions which spread over three
@@ -240,7 +244,13 @@ L<WEBPerl::Changetie>
 
 =cut
 
-# I have no idea how this works any more. And I've *only just* written it.
+# I have no idea how this works any more. And I've *only just* written
+# it.
+#                 -- Simon Cozens
+#
+# But it is correct, and simple! You just need to indent it correctly.
+#
+#                 -- Alberto Simoes
 
 sub _except {
   my $self = shift;
@@ -273,4 +283,4 @@ sub _except {
   return $self;
 }
 
-sub ishere { return 1 }
+# sub ishere { return 1 }
