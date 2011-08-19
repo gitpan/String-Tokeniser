@@ -7,16 +7,9 @@ use Carp;
 require Exporter;
 
 @ISA = qw(Exporter);
-# Items to export into callers namespace by default. Note: do not export
-# names by default without a very good reason. Use EXPORT_OK instead.
-# Do not simply export all your public functions/methods/constants.
 @EXPORT_OK = qw();
-$VERSION = '0.04';
 
-
-# Preloaded methods go here.
-
-# Autoload methods go after =cut, and are processed by the autosplit program.
+$VERSION = '0.05';
 
 1;
 
@@ -236,7 +229,7 @@ or more tokens, although this is planned.
 =head1 AUTHOR
 
 Originaly written by Simon Cozens;
-Maintained by Alberto Simões C<<ambs@cpan.org>>
+Maintained by Alberto Simoes C<<ambs@cpan.org>>
 
 =head1 SEE ALSO
 

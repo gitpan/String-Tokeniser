@@ -1,5 +1,8 @@
 Revision history for Perl extension String::Tokeniser.
 
+0.05  Fri Aug 19 21:57 2011
+        - Add abstract to META
+
 0.04  Thu Mar 31 15:32 2005
 	- Added README file;
 
